@@ -1,18 +1,136 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Home</ion-title>
+
+  <ion-navbar color="primary">
+      <br/>
+    <ion-toolbar no-border-top>
+    <ion-buttons start>
+      
+    </ion-buttons>
+    <ion-title>Scan Locker Code</ion-title>
+    <ion-buttons menuToggle left>
+      <button color="primary"  ion-button icon-only solid>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+  </ion-toolbar>
   </ion-navbar>
+
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <div align="center" valign="center">
+    
+    <br/> 
+    <h1>{{lable_tempat}}</h1>
+    <!-- <p>{{lable_locker}}</p> -->
+    <img *ngIf="scanner_status == 'nok'" (click)="actionBarcode()" style="height: 120px;margin-top: 10px" src="scanner.png"/>
+    <img *ngIf="scanner_status == 'ok'" (click)="actionBarcode()" style="height: 120px;margin-top: 10px" src="oke.png"/>
+    <h1>Scan QR sesuai posisi dibawah ini</h1>
+    <ion-card  hidden style="height: 150px;width: 150px" (click)="actionBarcode()">
+      <ion-card-content>
+        <!-- Add card content here! -->
+          <!--<img  src="assets/imgs/barcoder.png" >-->
+      </ion-card-content>
+    </ion-card>
+
+    <ion-item hidden style="width: : 10px;">
+      <ion-input [(ngModel)]="id_lemari" type="text" value="" placeholder="ID QR"></ion-input>
+    </ion-item>
+
+    <button hidden  (click)="menyala()" ion-button>ON</button>
+    <button hidden  (click)="connect()" ion-button>connect</button>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <table>
+      <tr>
+        <td>
+          
+          <img *ngIf="lable_locker =='Locker 01'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 01'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+
+        </td>
+        <td></td>
+        <td>
+            <img *ngIf="lable_locker =='Locker 02'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+            <img *ngIf="lable_locker !='Locker 02'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          
+          <img *ngIf="lable_locker =='Locker 03'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 03'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+
+        </td>
+        <td>
+
+          <img *ngIf="lable_locker =='Locker 04'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 04'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+
+        </td>
+        <td>
+          
+          <img *ngIf="lable_locker =='Locker 05'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 05'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <img *ngIf="lable_locker =='Locker 06'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 06'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+        </td>
+        <td>
+          <img *ngIf="lable_locker =='Locker 07'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 07'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+        </td>
+        <td>
+          <img *ngIf="lable_locker =='Locker 08'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 08'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <img *ngIf="lable_locker =='Locker 09'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 09'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+        </td>
+        <td>
+          <img *ngIf="lable_locker =='Locker 10'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 10'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+
+        </td>
+        <td>
+          <img *ngIf="lable_locker =='Locker 11'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 11'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <img *ngIf="lable_locker =='Locker 12'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 12'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+        </td>
+        <td>
+          <img *ngIf="lable_locker =='Locker 13'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 13'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+        </td>
+        <td>
+          <img *ngIf="lable_locker =='Locker 14'" style="height: 40px;margin-top: 10px;margin:10px" src="red_qr.png"/>
+          <img *ngIf="lable_locker !='Locker 14'" style="height: 40px;margin-top: 10px;margin:10px" src="grey_qr.png"/>
+
+        </td>
+      </tr>
+    </table>
+
+  </div>
 </ion-content>

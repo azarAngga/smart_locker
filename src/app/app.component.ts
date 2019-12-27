@@ -5,26 +5,45 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { LoginPage } from '../pages/login/login';
+import { SmV2Page } from '../pages/sm-v2/sm-v2';
+import { BlPage } from '../pages/bl/bl';
+import { ListGeneratePage } from '../pages/list-generate/list-generate';
+
+import { Storage } from '@ionic/storage';
+import { GeneratedFile } from '@angular/compiler';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+  @ViewChild(Nav) nav: Nav; 
 
-  rootPage: any = HomePage;
+  //rootPage: any = LoginPage;
+  rootPage: any;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform,
+   public storage: Storage,
+   public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage }
-    ];
-
+    this.storage.get('session').then((val) => {
+      if(val == "ok"){
+           this.rootPage = HomePage;
+          this.pages = [
+            { title: 'Home', component: HomePage },
+            { title: 'History', component: ListPage },
+            { title: 'Share Key', component:ListGeneratePage },
+            { title: 'Logout', component:  LoginPage }
+          ];
+      }else{
+          this.rootPage = LoginPage;
+          this.pages = [];
+      }
+    });
   }
 
   initializeApp() {

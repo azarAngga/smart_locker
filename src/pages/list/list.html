@@ -1,23 +1,50 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>List</ion-title>
   </ion-navbar>
+</ion-header> -->
+<ion-header>
+
+<ion-navbar color="primary">
+      <br/>
+    <ion-toolbar no-border-top>
+
+    <ion-title>Log History</ion-title>
+
+    <ion-buttons menuToggle left>
+      <button color="primary"  ion-button icon-only solid>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+
+  </ion-toolbar>
+  </ion-navbar>
+
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
+
+  <div align="center">
+  <img style="margin: 10px;height: 200px" src="logo-loccker-lock.png" />
   </div>
+  <ion-list>
+  <ion-item *ngFor="let items of data">
+    
+    <div *ngIf="items.status_locker == 'OUT'">
+      <ion-icon  name="unlock" item-start></ion-icon>
+       [ <b>{{items.status_locker}}</b> ] {{items.qr}}
+    </div>
+
+    <div *ngIf="items.status_locker == 'IN'">
+      <ion-icon  name="lock" item-start></ion-icon>
+       [ <b>{{items.status_locker}}</b> ] {{items.qr}}
+    </div>
+    
+  </ion-item>
+</ion-list>
+ 
 </ion-content>
